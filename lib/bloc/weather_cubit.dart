@@ -23,11 +23,12 @@ class WeatherCubit extends Cubit<WeatherState> {
   }
 
   Future<String?> getCurrentLocation() async {
-    Position position = await _determinePosition();
-    List<Placemark> placemarks = await placemarkFromCoordinates(
+    final Position position = await _determinePosition();
+    final List<Placemark> placemarks = await placemarkFromCoordinates(
       position.latitude,
       position.longitude,
     );
+    logger.log('location data is ${placemarks[0]}');
     return placemarks[0].locality;
   }
 
