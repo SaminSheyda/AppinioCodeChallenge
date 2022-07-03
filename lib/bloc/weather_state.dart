@@ -38,10 +38,11 @@ class WeatherErrorState extends WeatherState {
 /// User do not have Account.
 class WeatherLoadedState extends WeatherState {
   /// Initializes loaded State
-  const WeatherLoadedState({required this.cityName});
+  const WeatherLoadedState({required this.cityName,this.data});
 
   @override
   String toString() => 'WeatherLoadedState';
 
   final String cityName;
+  final ForecastData? data;
 }
