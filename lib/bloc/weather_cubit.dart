@@ -18,22 +18,19 @@ class WeatherCubit extends Cubit<WeatherState> {
   /// get weather data
   Future<void> getWeatherData() async {
     emit(const WeatherLoadingState());
-    // try {
+    try {
     UserLocation? location = await getCurrentLocation();
     if (location != null && location.city != null) {
-      var response = await ChopperWeatherService()
+      ForecastData response = await ChopperWeatherService()
           .getWeather(location.position.longitude, location.position.latitude);
-      print("aaaaaaaaaaaaaaaaaaaa");
-      print(response);
-
-      emit(WeatherLoadedState(cityName: location.city!));
+      emit(WeatherLoadedState(cityName: location.city!,data: response));
     } else {
       emit(const WeatherErrorState(
           errorMessage: 'could not access to location'));
     }
-    // } catch (error) {
-    //   emit(WeatherErrorState(errorMessage: error.toString()));
-    // }
+    } catch (error) {
+      emit(WeatherErrorState(errorMessage: error.toString()));
+    }
   }
 
   /// get current location of the device

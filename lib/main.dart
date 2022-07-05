@@ -1,5 +1,6 @@
 import 'package:appinio_code_challenge/bloc/weather_cubit.dart';
 import 'package:appinio_code_challenge/presentation/pages/main_page.dart';
+import 'package:appinio_code_challenge/presentation/pages/weather_forecast_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,6 +25,10 @@ class MyApp extends StatelessWidget {
                 create: (context) => WeatherCubit(),
                 child: const MainPage(),
               ),
+          WeatherForecastPage.routeName: (BuildContext context) => BlocProvider(
+            create: (context) => WeatherCubit(),
+            child: const WeatherForecastPage(),
+          ),
         });
   }
 }

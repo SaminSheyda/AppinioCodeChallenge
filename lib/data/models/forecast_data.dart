@@ -8,34 +8,27 @@ part 'forecast_data.g.dart';
 
 /// An annotation for the code generator to know that this class needs the
 /// JSON serialization logic to be generated.
-@JsonSerializable()
 class ForecastData {
   ForecastData({
+    required this.init,
+    required this.dataseries,
     this.product,
-    this.init,
-    this.dataseries,
   });
 
   factory ForecastData.fromJson(Map<String, dynamic> json) {
-
     var list = json['dataseries'] as List;
-    List<Dataseries> itemsList = list.map((i) => Dataseries.fromJson(i)).toList();
-print("ssssssssssss");
-print(json);
-print(itemsList);
+    List<Dataseries> itemsList =
+        list.map((i) => Dataseries.fromJsonData(i, json['init'])).toList();
     return ForecastData(
-      product:  json['dataseries'],
+      product: json['dataseries'],
       init: json['init'],
       dataseries: itemsList,
     );
   }
 
   String? product;
-  String? init;
-  List<Dataseries>? dataseries;
-
-  /// to json
-  Map<String, dynamic> toJson() => _$ForecastDataToJson(this);
+  String init;
+  List<Dataseries> dataseries;
 }
 
 /// timepoint : 3
@@ -52,7 +45,7 @@ print(itemsList);
 class Dataseries {
   /// constructor
   Dataseries({
-    this.timepoint,
+    required this.timepoint,
     this.cloudcover,
     this.seeing,
     this.transparency,
@@ -63,9 +56,25 @@ class Dataseries {
     this.precType,
   });
 
-  factory Dataseries.fromJson(Map<String, dynamic> json) => _$DataseriesFromJson(json);
+  factory Dataseries.fromJsonData(Map<String, dynamic> json,String init) {
+    DateTime timpePoint = _getDateTime(init, json['timepoint'] as int);
 
-  int? timepoint;
+    return Dataseries(
+      timepoint: timpePoint,
+      cloudcover: json['cloudcover'] as int?,
+      seeing: json['seeing'] as int?,
+      transparency: json['transparency'] as int?,
+      liftedIndex: json['liftedIndex'] as int?,
+      rh2m: json['rh2m'] as int?,
+      wind10m: json['wind10m'] == null
+          ? null
+          : Wind10m.fromJson(json['wind10m'] as Map<String, dynamic>),
+      temp2m: json['temp2m'] as int?,
+      precType: json['precType'] as String?,
+    );
+  }
+
+  DateTime timepoint;
   int? cloudcover;
   int? seeing;
   int? transparency;
@@ -91,7 +100,22 @@ class Wind10m {
   String? direction;
   int? speed;
 
-  factory Wind10m.fromJson(Map<String, dynamic> json) => _$Wind10mFromJson(json);
+  factory Wind10m.fromJson(Map<String, dynamic> json) =>
+      _$Wind10mFromJson(json);
 
   Map<String, dynamic> toJson() => _$Wind10mToJson(this);
+}
+
+/// get the  date and time from init value
+DateTime _getDateTime(String init, int timePoint) {
+  final stringDate = init.substring(0, 8);
+  final initTime = int.parse(init.substring(8));
+  DateTime dateTime = DateTime.parse(stringDate);
+
+  /// add current time zone to the date
+  final Duration timezoneOffset = DateTime.now().timeZoneOffset;
+
+  return dateTime
+      .add(Duration(hours: timePoint + initTime))
+      .add(timezoneOffset);
 }

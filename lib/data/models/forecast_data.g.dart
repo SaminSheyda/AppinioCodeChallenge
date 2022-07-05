@@ -6,23 +6,8 @@ part of 'forecast_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ForecastData _$ForecastDataFromJson(Map<String, dynamic> json) => ForecastData(
-      product: json['product'] as String?,
-      init: json['init'] as String?,
-      dataseries: (json['dataseries'] as List<dynamic>?)
-          ?.map((e) => Dataseries.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$ForecastDataToJson(ForecastData instance) =>
-    <String, dynamic>{
-      'product': instance.product,
-      'init': instance.init,
-      'dataseries': instance.dataseries,
-    };
-
 Dataseries _$DataseriesFromJson(Map<String, dynamic> json) => Dataseries(
-      timepoint: json['timepoint'] as int?,
+      timepoint: DateTime.parse(json['timepoint'] as String),
       cloudcover: json['cloudcover'] as int?,
       seeing: json['seeing'] as int?,
       transparency: json['transparency'] as int?,
@@ -37,7 +22,7 @@ Dataseries _$DataseriesFromJson(Map<String, dynamic> json) => Dataseries(
 
 Map<String, dynamic> _$DataseriesToJson(Dataseries instance) =>
     <String, dynamic>{
-      'timepoint': instance.timepoint,
+      'timepoint': instance.timepoint.toIso8601String(),
       'cloudcover': instance.cloudcover,
       'seeing': instance.seeing,
       'transparency': instance.transparency,

@@ -18,8 +18,9 @@ class _$WeatherService extends WeatherService {
 
   @override
   Future<Response<dynamic>> getWeather(double lon, double lat) {
-    final $url = '';
-    final $request = Request('GET', $url, client.baseUrl);
+    final $url = '/bin/astro.php';
+    final $params = <String, dynamic>{'lon': lon, 'lat': lat};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<dynamic, dynamic>($request);
   }
 }

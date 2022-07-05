@@ -19,12 +19,15 @@ class ModelConvertor extends JsonConverter {
       return ForecastData.fromJson(jsonMap) as T;
     }
 
-    List<Dataseries> itemsList = items.map((i) => Dataseries.fromJson(i)).toList();
-    print("ssssssssssss");
-    print(json);
-    print(itemsList);
+    List<Dataseries> itemsList = items
+        .map((i) => Dataseries.fromJsonData(
+              i,
+              jsonMap['init'],
+            ))
+        .toList();
+
     return ForecastData(
-      product:  jsonMap['product'],
+      product: jsonMap['product'],
       init: jsonMap['init'],
       dataseries: itemsList,
     ) as T;

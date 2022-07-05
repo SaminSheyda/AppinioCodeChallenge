@@ -12,7 +12,7 @@ abstract class WeatherService extends ChopperService {
       _$WeatherService(client);
 
   /// get weather
-  @Get()
+  @Get(path: '/bin/astro.php')
   Future<Response<dynamic>> getWeather(
       @Query('lon') double lon, @Query('lat') double lat);
 }
@@ -24,7 +24,7 @@ class ChopperWeatherService {
 
   ChopperWeatherService._internal() {
     final ChopperClient client = ChopperClient(
-      baseUrl: 'https://www.7timer.info/bin/astro.php',
+      baseUrl: 'https://www.7timer.info',
       interceptors: <dynamic>[_addQuery, HttpLoggingInterceptor()],
       converter:  ModelConvertor(),
       errorConverter: const JsonConverter(),
@@ -48,5 +48,7 @@ class ChopperWeatherService {
 Request _addQuery(Request req) {
   final Map<String, dynamic> params = Map<String, dynamic>.from(req.parameters);
   params['output'] = 'json';
+  params['unit'] = 'metric';
+  params['tzshift'] = '0';
   return req.copyWith(parameters: params);
 }

@@ -1,5 +1,5 @@
-import 'package:appinio_code_challenge/presentation/pages/resume_tab.dart';
-import 'package:appinio_code_challenge/presentation/pages/weather_tab.dart';
+import 'package:appinio_code_challenge/presentation/widget/resume_tab.dart';
+import 'package:appinio_code_challenge/presentation/widget/weather_tab.dart';
 import 'package:flutter/material.dart';
 
 /// main page of the application
