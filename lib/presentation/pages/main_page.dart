@@ -21,9 +21,9 @@ class MainPage extends StatelessWidget {
             ),
             title: const Text('Appinino Code Challenge'),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
-              WeatherTab(),
+              const WeatherTab(),
               ResumeTab(),
             ],
           ),
