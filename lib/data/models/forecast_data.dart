@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'forecast_data.g.dart';
@@ -6,10 +7,8 @@ part 'forecast_data.g.dart';
 /// init : "2022070306"
 /// dataseries : [{"timepoint":3,"cloudcover":9,"seeing":8,"transparency":5,"lifted_index":-1,"rh2m":12,"wind10m":{"direction":"S","speed":3},"temp2m":28,"prec_type":"rain"},{"timepoint":6,"cloudcover":9,"seeing":8,"transparency":5,"lifted_index":-1,"rh2m":13,"wind10m":{"direction":"S","speed":3},"temp2m":27,"prec_type":"rain"},{"timepoint":9,"cloudcover":9,"seeing":8,"transparency":5,"lifted_index":-1,"rh2m":12,"wind10m":{"direction":"S","speed":3},"temp2m":26,"prec_type":"rain"},{"timepoint":12,"cloudcover":9,"seeing":8,"transparency":6,"lifted_index":-1,"rh2m":13,"wind10m":{"direction":"S","speed":3},"temp2m":26,"prec_type":"rain"},{"timepoint":15,"cloudcover":9,"seeing":8,"transparency":7,"lifted_index":-1,"rh2m":14,"wind10m":{"direction":"SE","speed":3},"temp2m":25,"prec_type":"rain"},{"timepoint":18,"cloudcover":9,"seeing":7,"transparency":7,"lifted_index":-1,"rh2m":13,"wind10m":{"direction":"S","speed":2},"temp2m":26,"prec_type":"rain"},{"timepoint":21,"cloudcover":9,"seeing":8,"transparency":7,"lifted_index":-1,"rh2m":13,"wind10m":{"direction":"S","speed":2},"temp2m":26,"prec_type":"rain"},{"timepoint":24,"cloudcover":9,"seeing":7,"transparency":7,"lifted_index":-1,"rh2m":13,"wind10m":{"direction":"S","speed":3},"temp2m":26,"prec_type":"rain"},{"timepoint":27,"cloudcover":9,"seeing":7,"transparency":8,"lifted_index":-1,"rh2m":14,"wind10m":{"direction":"S","speed":3},"temp2m":25,"prec_type":"rain"},{"timepoint":30,"cloudcover":9,"seeing":8,"transparency":7,"lifted_index":-1,"rh2m":13,"wind10m":{"direction":"SE","speed":3},"temp2m":25,"prec_type":"rain"},{"timepoint":33,"cloudcover":9,"seeing":8,"transparency":8,"lifted_index":-1,"rh2m":14,"wind10m":{"direction":"SE","speed":2},"temp2m":25,"prec_type":"rain"},{"timepoint":36,"cloudcover":9,"seeing":8,"transparency":7,"lifted_index":-1,"rh2m":14,"wind10m":{"direction":"SE","speed":2},"temp2m":25,"prec_type":"rain"},{"timepoint":39,"cloudcover":9,"seeing":8,"transparency":7,"lifted_index":-1,"rh2m":14,"wind10m":{"direction":"SE","speed":2},"temp2m":25,"prec_type":"rain"},{"timepoint":42,"cloudcover":9,"seeing":6,"transparency":8,"lifted_index":-1,"rh2m":14,"wind10m":{"direction":"SE","speed":2},"temp2m":25,"prec_type":"rain"},{"timepoint":45,"cloudcover":9,"seeing":6,"transparency":7,"lifted_index":-4,"rh2m":12,"wind10m":{"direction":"S","speed":2},"temp2m":26,"prec_type":"rain"},{"timepoint":48,"cloudcover":9,"seeing":6,"transparency":4,"lifted_index":-4,"rh2m":10,"wind10m":{"direction":"S","speed":3},"temp2m":30,"prec_type":"rain"},{"timepoint":51,"cloudcover":9,"seeing":7,"transparency":5,"lifted_index":-4,"rh2m":12,"wind10m":{"direction":"S","speed":3},"temp2m":29,"prec_type":"rain"},{"timepoint":54,"cloudcover":9,"seeing":8,"transparency":6,"lifted_index":-4,"rh2m":13,"wind10m":{"direction":"SE","speed":3},"temp2m":27,"prec_type":"rain"},{"timepoint":57,"cloudcover":9,"seeing":7,"transparency":8,"lifted_index":-4,"rh2m":14,"wind10m":{"direction":"S","speed":3},"temp2m":26,"prec_type":"rain"},{"timepoint":60,"cloudcover":9,"seeing":7,"transparency":8,"lifted_index":-4,"rh2m":14,"wind10m":{"direction":"S","speed":2},"temp2m":26,"prec_type":"rain"},{"timepoint":63,"cloudcover":9,"seeing":8,"transparency":8,"lifted_index":-4,"rh2m":14,"wind10m":{"direction":"SE","speed":2},"temp2m":25,"prec_type":"none"},{"timepoint":66,"cloudcover":9,"seeing":6,"transparency":8,"lifted_index":-4,"rh2m":13,"wind10m":{"direction":"E","speed":2},"temp2m":26,"prec_type":"rain"},{"timepoint":69,"cloudcover":9,"seeing":8,"transparency":5,"lifted_index":-1,"rh2m":13,"wind10m":{"direction":"NE","speed":2},"temp2m":27,"prec_type":"rain"},{"timepoint":72,"cloudcover":9,"seeing":7,"transparency":6,"lifted_index":-1,"rh2m":13,"wind10m":{"direction":"SE","speed":2},"temp2m":27,"prec_type":"rain"}]
 
-/// An annotation for the code generator to know that this class needs the
-/// JSON serialization logic to be generated.
-class ForecastData {
-  ForecastData({
+class ForecastData extends Equatable {
+  const ForecastData({
     required this.init,
     required this.dataseries,
     this.product,
@@ -20,15 +19,18 @@ class ForecastData {
     List<Dataseries> itemsList =
         list.map((i) => Dataseries.fromJsonData(i, json['init'])).toList();
     return ForecastData(
-      product: json['dataseries'],
+      product: json['product'],
       init: json['init'],
       dataseries: itemsList,
     );
   }
 
-  String? product;
-  String init;
-  List<Dataseries> dataseries;
+  final String? product;
+  final String init;
+  final List<Dataseries> dataseries;
+
+  @override
+  List<Object?> get props => [product,init,dataseries];
 }
 
 /// timepoint : 3
@@ -41,6 +43,8 @@ class ForecastData {
 /// temp2m : 28
 /// prec_type : "rain"
 
+/// An annotation for the code generator to know that this class needs the
+/// JSON serialization logic to be generated.
 @JsonSerializable()
 class Dataseries {
   /// constructor

@@ -1,7 +1,7 @@
 part of 'weather_cubit.dart';
 
 /// Weather feature states
-abstract class WeatherState {
+abstract class WeatherState extends Equatable {
   /// Initializes states.
   const WeatherState();
 }
@@ -10,6 +10,9 @@ abstract class WeatherState {
 class WeatherInitialState extends WeatherState {
   /// Initializes initial state.
   const WeatherInitialState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 /// User have Account.
@@ -19,6 +22,9 @@ class WeatherLoadingState extends WeatherState {
 
   @override
   String toString() => 'WeatherLoadingState';
+
+  @override
+  List<Object?> get props => [];
 }
 
 /// User do not have Account.
@@ -33,6 +39,9 @@ class WeatherErrorState extends WeatherState {
 
   @override
   String toString() => 'WeatherErrorState';
+
+  @override
+  List<Object?> get props => [errorMessage];
 }
 
 /// User do not have Account.
@@ -45,4 +54,7 @@ class WeatherLoadedState extends WeatherState {
 
   final String cityName;
   final ForecastData data;
+
+  @override
+  List<Object?> get props => [cityName,data];
 }
