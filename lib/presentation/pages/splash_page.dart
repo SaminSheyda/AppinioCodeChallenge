@@ -57,9 +57,7 @@ class SplashPage extends StatelessWidget {
             ),
           ),
           Center(
-            child: Container(
-              child: Image.asset('assets/logo.png'),
-            ),
+            child: Image.asset('assets/logo.png'),
           ),
         ],
       )),

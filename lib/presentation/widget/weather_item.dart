@@ -119,7 +119,8 @@ class WeatherItem extends StatelessWidget {
             int.parse(DateFormat('HH').format(data.timepoint)) <= 6) {
           return Icons.nightlight;
         }
-        return Icons.sunny;
+        else{
+          return Icons.sunny;}
       } else if (data.cloudcover! >= 7) {
         return Icons.cloud;
       } else if (data.cloudcover! < 7 && data.cloudcover! > 3) {

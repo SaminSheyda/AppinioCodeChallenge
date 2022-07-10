@@ -30,7 +30,7 @@ class WeatherTab extends StatelessWidget {
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.35,
                   child: BlocBuilder<WeatherCubit, WeatherState>(
-                    builder: (BuildContext context, WeatherState state) {
+                    builder: (_, WeatherState state) {
                       if (state is WeatherLoadedState) {
                         final int currentTemp=_getCurrentTemp(state.data.dataseries);
                         return Column(
