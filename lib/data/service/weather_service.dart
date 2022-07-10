@@ -3,7 +3,6 @@ import 'package:appinio_code_challenge/data/models/forecast_data.dart';
 import 'package:appinio_code_challenge/data/models/model_converter.dart';
 import 'package:chopper/chopper.dart';
 
-
 part 'weather_service.chopper.dart';
 
 /// InvestmentService
@@ -58,8 +57,9 @@ Request _addQuery(Request req) {
 class MockWeatherService implements WeatherService {
   @override
   Future<Response> getWeather(double lon, double lat) async =>
-      Future<Response>.delayed(const Duration(milliseconds: 1000)).whenComplete(() {
-       ForecastData.fromJson(mockForecastData);
+      Future<Response>.delayed(const Duration(milliseconds: 1000))
+          .whenComplete(() {
+        ForecastData.fromJson(mockForecastData);
       });
 
   @override

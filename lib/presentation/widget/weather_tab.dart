@@ -18,10 +18,8 @@ class WeatherTab extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: GestureDetector(
-              onTap: () => Navigator.pushNamed(
-                context,
-                WeatherForecastPage.routeName
-              ),
+              onTap: () =>
+                  Navigator.pushNamed(context, WeatherForecastPage.routeName),
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -32,7 +30,8 @@ class WeatherTab extends StatelessWidget {
                   child: BlocBuilder<WeatherCubit, WeatherState>(
                     builder: (_, WeatherState state) {
                       if (state is WeatherLoadedState) {
-                        final int currentTemp=_getCurrentTemp(state.data.dataseries);
+                        final int currentTemp =
+                            _getCurrentTemp(state.data.dataseries);
                         return Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -113,7 +112,7 @@ class WeatherTab extends StatelessWidget {
     for (int i = 0; i < data.length; i++) {
       if (data[i].timepoint.difference(DateTime.now()) <
           const Duration(hours: 3)) {
-        return data[i].temp2m?? 0;
+        return data[i].temp2m ?? 0;
       }
     }
     return 0;

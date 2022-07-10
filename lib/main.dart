@@ -19,8 +19,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _weatherCubit =
-      WeatherCubit(ChopperWeatherService(), LocationService());
+  final _weatherCubit = WeatherCubit(ChopperWeatherService(), LocationService())
+    ..getWeatherData();
 
   @override
   Widget build(BuildContext context) {

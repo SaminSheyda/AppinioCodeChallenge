@@ -1,10 +1,7 @@
-
 import 'package:appinio_code_challenge/data/models/user_location.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:developer' as logger;
-
-
 
 class LocationService {
   /// get current location of the device
@@ -58,5 +55,4 @@ class LocationService {
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
   }
-
 }

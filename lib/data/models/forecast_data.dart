@@ -30,7 +30,7 @@ class ForecastData extends Equatable {
   final List<Dataseries> dataseries;
 
   @override
-  List<Object?> get props => [product,init,dataseries];
+  List<Object?> get props => [product, init, dataseries];
 }
 
 /// timepoint : 3
@@ -60,7 +60,7 @@ class Dataseries {
     this.precType,
   });
 
-  factory Dataseries.fromJsonData(Map<String, dynamic> json,String init) {
+  factory Dataseries.fromJsonData(Map<String, dynamic> json, String init) {
     DateTime timpePoint = _getDateTime(init, json['timepoint'] as int);
 
     return Dataseries(

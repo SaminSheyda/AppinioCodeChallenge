@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part'resume_data.g.dart';
+part 'resume_data.g.dart';
 
 @JsonSerializable()
 class ResumeData {
@@ -22,15 +22,14 @@ class ResumeData {
 
   factory ResumeData.fromJson(Map<String, dynamic> json) =>
       _$ResumeDataFromJson(json);
-
 }
 
 @JsonSerializable()
-class HyperLink{
+class HyperLink {
   HyperLink(this.title, this.url);
+
   factory HyperLink.fromJson(Map<String, dynamic> json) =>
       _$HyperLinkFromJson(json);
   final String title;
   final String url;
-
 }
